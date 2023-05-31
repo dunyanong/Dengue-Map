@@ -1,4 +1,4 @@
-var cities = [
+const cities = [
     { name: 'Kuala Lumpur', coordinates: [3.1390, 101.6869], radius: 600 },
     { name: 'George Town', coordinates: [5.4149, 100.3298], radius: 600 },
     { name: 'Ipoh', coordinates: [4.5975, 101.0901], radius: 600 },
@@ -100,13 +100,14 @@ var cities = [
     { name: 'Tampin', coordinates: [2.4692, 102.2324], radius: 600 },
     { name: 'Putatan', coordinates: [5.9043, 116.0462], radius: 600 },
 ]
-
-var geojson = {
+// Initializing the GeoJSON object
+let geojson = {
     type: 'FeatureCollection',
     features: []
 };
 
-cities.forEach(function(city) {
+// Iterating over each city and creating a GeoJSON feature object
+cities.forEach(city => {
     var feature = {
         type: 'Feature',
         properties: {
@@ -121,17 +122,20 @@ cities.forEach(function(city) {
     geojson.features.push(feature);
 });
 
-console.log(JSON.stringify(geojson));
- 
-var map = L.map('map', {renderer: L.canvas()}).setView([3.1390, 101.6869], 8);
-var myRenderer = L.canvas({ padding: 0.5 });
+// Initializing the Leaflet map and setting the view
+let map = L.map('map', {renderer: L.canvas()}).setView([3.1390, 101.6869], 8);
+
+// Specifying a custom renderer for the map:
+let myRenderer = L.canvas({ padding: 0.5 });
+
+// Adding a tile layer from OpenStreetMap to the map
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
 // Add circles for each city
-cities.forEach(function(city) {
+cities.forEach(city => {
     L.circle(city.coordinates, {
     color: 'red',
     fillColor: '#f03',
