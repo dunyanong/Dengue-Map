@@ -118,7 +118,7 @@ cities.forEach(city => {
         fillColor: '#f03',
         fillOpacity: 0.5,
         radius: 600,
-        stroke: false, // Remove the border
+        stroke: false,
         renderer: myRenderer,
     }).addTo(map).bindPopup(city.name);
 });
